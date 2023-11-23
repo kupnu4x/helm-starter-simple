@@ -1,7 +1,12 @@
+nameOverride: ""
+fullnameOverride: ""
+
 image:
   repository: nginx
   tag: latest
   pullPolicy: IfNotPresent
+
+replicas: 1
 
 imagePullSecrets:
   - name: regsecret
@@ -14,6 +19,9 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+nodeSelector: {}
+tolerations: []
+
 service:
   type: ClusterIP
   port: 80
@@ -21,7 +29,7 @@ service:
 ingress:
   enabled: true
   className: nginx
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+  annotations: {}
   host: example.com
   path: /
+  pathType: ImplementationSpecific
